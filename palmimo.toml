@@ -6,27 +6,27 @@ schema = 1
 # アプリ名。英小文字・数字・ハイフン（先頭は英字、40 文字まで）。
 # 端末上の ID は「<入れた場所>.<name>」になる（GitHub なら owner 名、zip なら zip）。
 name = "my-palmimo-app"
-description = "Palmimo アプリのテンプレート。Portal で設定した値をログに出します。"
+description = "Servo-current touch probe: logs leg current while you poke, grip, press and load the robot."
 
 # 起動コマンド。シェルは通さないので配列で書く。{param} は下の params の値に置き換わる。
 # Portal はこれをアプリのディレクトリで `uv run` 経由で実行する。
-command = ["python", "main.py", "--message", "{message}", "--repeat", "{repeat}"]
+command = ["python", "probe.py", "--baseline", "{baseline}", "--phase", "{phase}"]
 
-# 使うデバイス。camera / audio / motor_display から選ぶ。書かなければどのデバイスも開けない。
-# devices = ["motor_display"]
+devices = ["motor_display"]
 
-[params.message]
-type = "string"
-default = "こんにちは、Palmimo!"
-max_length = 100
-description = "ログに出すメッセージ"
-
-[params.repeat]
+[params.baseline]
 type = "int"
-default = 3
-min = 1
-max = 10
-description = "くり返す回数"
+default = 8
+min = 3
+max = 30
+description = "Seconds hands-off for baseline / rest"
+
+[params.phase]
+type = "int"
+default = 10
+min = 3
+max = 30
+description = "Seconds per touch phase"
 
 # API キーなど、秘密にしたい値は env で宣言する。値は Portal の「環境変数」画面で入れる。
 # [env.EXAMPLE_API_KEY]

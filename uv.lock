@@ -3,15 +3,27 @@ revision = 5
 requires-python = ">=3.13"
 
 [[package]]
+name = "dynamixel-sdk"
+version = "4.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyserial" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c0/93/87fb2aa84c173a93397ed165827853a54177d13e55dc3e240f400bc00247/dynamixel_sdk-4.1.0.tar.gz", hash = "sha256:9ffcc12ab72623f4bf6c0e1df8cd256a1fa19a7099204c002ff9b7fc0027e26d", size = 29655, upload-time = "2026-09-14T04:42:20.029Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/01/4a/c58bf575b5eec48ac3fe54c74c1fdd5a456ac8b03249f5e53dc0be503041/dynamixel_sdk-4.1.0-py3-none-any.whl", hash = "sha256:4cb91491edcb5c0b9d7eda34935c26ae6a37c1fe766cc6c4b58bc6583fb941f2", size = 103484, upload-time = "2026-09-14T04:42:18.661Z" },
+]
+
+[[package]]
 name = "my-palmimo-app"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "palmimo-sdk" },
+    { name = "palmimo-sdk", extra = ["hardware"] },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "palmimo-sdk", specifier = ">=0.1.4" }]
+requires-dist = [{ name = "palmimo-sdk", extras = ["hardware"], specifier = ">=0.1.4" }]
 
 [[package]]
 name = "palmimo-sdk"
@@ -23,6 +35,11 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/6b/6e/ededa2f2b2dea8744d727983565e16894994476803b1b95282027ab3fc35/palmimo_sdk-0.1.4.tar.gz", hash = "sha256:83f44bfe3b5fefc183af2a2a0a83c41327eea96116c2aac9b755701d4cdd4045", size = 406226, upload-time = "2026-10-05T12:37:19.175Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d3/7b/758c61f3a9bdb6948a10c657d75f246cbf61d35c27fb754fe428708ee5fb/palmimo_sdk-0.1.4-py3-none-any.whl", hash = "sha256:9a0ce666f0e0af77a8969fb896fb2dadad6c9503ee414b804fe32a44d5606018", size = 262950, upload-time = "2026-10-05T12:37:17.835Z" },
+]
+
+[package.optional-dependencies]
+hardware = [
+    { name = "dynamixel-sdk" },
 ]
 
 [[package]]
