@@ -6,27 +6,34 @@ schema = 1
 # アプリ名。英小文字・数字・ハイフン（先頭は英字、40 文字まで）。
 # 端末上の ID は「<入れた場所>.<name>」になる（GitHub なら owner 名、zip なら zip）。
 name = "my-palmimo-app"
-description = "Servo-current touch probe: logs leg current while you poke, grip, press and load the robot."
+description = "Palmimo can feel: handshake, poke and press reactions sensed through leg-servo current."
 
 # 起動コマンド。シェルは通さないので配列で書く。{param} は下の params の値に置き換わる。
 # Portal はこれをアプリのディレクトリで `uv run` 経由で実行する。
-command = ["python", "probe.py", "--baseline", "{baseline}", "--phase", "{phase}"]
+command = ["python", "touch.py", "--grip", "{grip}", "--poke", "{poke}", "--press", "{press}"]
 
 devices = ["motor_display"]
 
-[params.baseline]
+[params.grip]
 type = "int"
-default = 8
-min = 3
-max = 30
-description = "Seconds hands-off for baseline / rest"
+default = 60
+min = 20
+max = 400
+description = "Handshake threshold on leg_6_pitch1 deviation (probe saw ~150)"
 
-[params.phase]
+[params.poke]
 type = "int"
-default = 10
-min = 3
-max = 30
-description = "Seconds per touch phase"
+default = 15
+min = 5
+max = 200
+description = "Poke threshold on front-right leg deviation (probe saw ~28). Raise if it fires by itself."
+
+[params.press]
+type = "int"
+default = 0
+min = 0
+max = 1000
+description = "Body-press threshold (sum of deviations). 0 = off; try 120."
 
 # API キーなど、秘密にしたい値は env で宣言する。値は Portal の「環境変数」画面で入れる。
 # [env.EXAMPLE_API_KEY]
